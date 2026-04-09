@@ -7,10 +7,7 @@ const CallToAction = () => {
         <p className="text-xl font-medium max-w-md text-slate-800">
           Build a Professional Resume Tat Helps You to Stand Out and Get Hired
         </p>
-        <a
-          href="https://github.com/kiranvadhel"
-          className="flex items-center gap-2 rounded py-3 px-8 bg-green-600 hover:bg-green-700 transition text-white "
-        >
+        <a className="flex items-center gap-2 rounded py-3 px-8 bg-green-600 hover:bg-green-700 transition text-white ">
           <span> Get Started</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
