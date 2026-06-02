@@ -16,6 +16,6 @@ aiRouter.post("/upload-resume", protect, uploadResume);
 
 aiRouter.put("/update-resume/:id", protect, updateResume);
 
-console.log("AI ROUTES LOADED 🔥");
+console.log("AI ROUTES LOADED ");
 
 export default aiRouter;

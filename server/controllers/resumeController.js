@@ -1,7 +1,7 @@
 import Resume from "../models/Resume.js";
 import mongoose from "mongoose";
 
-// ✅ CREATE
+//  CREATE
 export const creteResume = async (req, res) => {
   try {
     const userId = req.userId;
@@ -19,7 +19,7 @@ export const creteResume = async (req, res) => {
   }
 };
 
-// ✅ DELETE
+//  DELETE
 export const deleteResume = async (req, res) => {
   try {
     const userId = req.userId;
@@ -36,7 +36,7 @@ export const deleteResume = async (req, res) => {
   }
 };
 
-// ✅ GET (🔥 FIXED)
+// ✅ GET 
 export const getResumeById = async (req, res) => {
   try {
     const userId = req.userId;
@@ -55,7 +55,7 @@ export const getResumeById = async (req, res) => {
   }
 };
 
-// ✅ PUBLIC
+//  PUBLIC
 export const getResumeByIdPublic = async (req, res) => {
   try {
     const { resumeId } = req.params;
@@ -73,17 +73,17 @@ export const getResumeByIdPublic = async (req, res) => {
   }
 };
 
-// ✅ UPDATE (FINAL CLEAN)
+//  UPDATE
 export const updateResume = async (req, res) => {
   try {
-    console.log("🔥 BODY RECEIVED:", req.body);
+    console.log(" BODY RECEIVED:", req.body);
 
     const userId = req.userId;
 
     let resumeId = null;
     let updateData = {};
 
-    // 🔥 Full update
+    //  update
     if (req.body.resumeId && req.body.resumeData) {
       resumeId = req.body.resumeId;
 
@@ -101,7 +101,7 @@ export const updateResume = async (req, res) => {
       updateData = { $set: parsedData };
     }
 
-    // 🔥 Title only
+    //  Title only
     else if (req.body.id) {
       resumeId = req.body.id;
 
@@ -112,18 +112,18 @@ export const updateResume = async (req, res) => {
       };
     }
 
-    // ❌ No ID
+    // No ID
     if (!resumeId) {
       return res.status(400).json({ message: "Resume ID required" });
     }
 
-    // ❌ Invalid ID
+    //  Invalid ID
     if (!mongoose.Types.ObjectId.isValid(resumeId)) {
       return res.status(400).json({ message: "Invalid Resume ID" });
     }
 
-    console.log("🛠 Updating Resume ID:", resumeId);
-    console.log("📦 Update Data:", updateData);
+    console.log(" Updating Resume ID:", resumeId);
+    console.log(" Update Data:", updateData);
 
     const updatedResume = await Resume.findOneAndUpdate(
       { _id: resumeId, userId },
@@ -141,7 +141,7 @@ export const updateResume = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("❌ UPDATE ERROR:", error);
+    console.error(" UPDATE ERROR:", error);
     return res.status(500).json({ message: "Server Error" });
   }
 };

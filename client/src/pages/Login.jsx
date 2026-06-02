@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      // 🔥 LOGIN vs REGISTER अलग data भेजना
+      
       const payload =
         state === "login"
           ? {

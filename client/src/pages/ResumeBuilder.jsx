@@ -38,8 +38,8 @@ const ResumeBuilder = () => {
 
   const loadExistingResume = async () => {
   try {
-    console.log("🔥 API CALLED");
-    console.log("🔥 PARAM ID:", resumeId);
+    console.log(" API CALLED");
+    console.log("PARAM ID:", resumeId);
 
     const { data } = await api.get('/resume/get/' + resumeId, {
       headers: {
@@ -47,19 +47,19 @@ const ResumeBuilder = () => {
       }
     });
 
-    console.log("🧾 FULL RESPONSE:", data);
-    console.log("📦 RESUME OBJECT:", data.resume);
-    console.log("🆔 RESUME ID:", data.resume?._id);
+    // console.log(" FULL RESPONSE:", data);
+    // console.log(" RESUME OBJECT:", data.resume);
+    // console.log(" RESUME ID:", data.resume?._id);
 
     if (data.resume) {
-      console.log("✅ SETTING RESUME DATA");
+      console.log(" SETTING RESUME DATA");
       setResumeData(data.resume);
     } else {
-      console.log("❌ NO RESUME FOUND");
+      console.log(" NO RESUME FOUND");
     }
 
   } catch (error) {
-    console.log("❌ LOAD ERROR:", error.message);
+    console.log(" LOAD ERROR:", error.message);
   }
 };
 
@@ -91,7 +91,7 @@ const ResumeBuilder = () => {
       {
         resumeId: resumeData._id,
         title: resumeData.title || "Untitled Resume",
-        isPublic: !resumeData.public, // try using isPublic instead of public
+        isPublic: !resumeData.public, 
       },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -120,27 +120,27 @@ const ResumeBuilder = () => {
     window.print();
   }
 
-  // ✅ FINAL FIXED SAVE FUNCTION
+  
 const saveResume = async () => {
   try {
-    console.log("🔥 FINAL resumeData:", resumeData);
-    console.log("🔥 resumeId:", resumeId);
-    console.log("🔥 resumeData._id:", resumeData?._id);
+    console.log(" FINAL resumeData:", resumeData);
+    console.log(" resumeId:", resumeId);
+    console.log(" resumeData._id:", resumeData?._id);
 
     const finalId = resumeData?._id || resumeId;
 
     if (!finalId) {
-      console.log("❌ Missing ID");
+      console.log(" Missing ID");
       return;
     }
 
-    console.log("📤 SENDING ID:", finalId);
+    console.log(" SENDING ID:", finalId);
 
     const response = await api.put(
       '/resume/update',
       {
         resumeId: finalId,
-        resumeData: JSON.stringify(resumeData) // ✅🔥 FIX
+        resumeData: JSON.stringify(resumeData) 
       },
       {
         headers: {
@@ -151,18 +151,18 @@ const saveResume = async () => {
 
     const data = response.data;
 
-    console.log("✅ RESPONSE:", data);
+    console.log(" RESPONSE:", data);
 
     if (data?.resume) {
       setResumeData(data.resume);
     }
 
   } catch (error) {
-    console.error("❌ Error saving resume:", error.response?.data || error.message);
+    console.error(" Error saving resume:", error.response?.data || error.message);
   }
 };
     
-console.log("🔥 COMPONENT resumeId:", resumeId);
+console.log(" COMPONENT resumeId:", resumeId);
 if (!resumeData) return <div>Loading...</div>;
   return (
     <div>
@@ -225,7 +225,7 @@ if (!resumeData) return <div>Loading...</div>;
           ...prev,
           personal_info: {
             ...prev.personal_info,
-            ...data, // ✅ yaha image aur baaki fields dono merge ho jayenge
+            ...data, 
           }
         }))
       } 
@@ -293,12 +293,6 @@ if (!resumeData) return <div>Loading...</div>;
                     <Share2Icon className='size-4'/> Share
                   </button>
                 )}
-
-                {/* <button onClick={changeResumeVisibility} className='flex items-center p-2 px-4 gap-2 text-xs bg-gradient-to-br from-purple-100
-                 to-purple-200 text-purple-600 ring-purple-300 rounded-lg hover:ring transition-colors'>
-                  {resumeData.public ? <EyeIcon className="size-4"/> : <EyeOff className='size-4'/>}
-                  {resumeData.public ? 'Public': 'Private'}
-                </button> */}
 
                 <button onClick={downloadResume} className="flex items-center gap-2 px-6 py-2 text-xs bg-gradient-to-br from-green-100
                  to-green-200 text-green-600 ring-green-300 rounded-lg ring-blue-300 hover:ring transition-colors">
